@@ -60,7 +60,7 @@ function ControlButton({
         danger
           ? "bg-red-500/90 hover:bg-red-500 text-white"
           : active
-          ? "bg-indigo-500/90 hover:bg-indigo-500 text-white"
+          ? "bg-pink-500/90 hover:bg-pink-500 text-white"
           : "bg-white/[0.07] hover:bg-white/[0.12] text-white/80"
       } ${className}`}
     >
@@ -94,7 +94,7 @@ export function ControlBar({
   const [showMore, setShowMore] = useState(false);
 
   return (
-    <div className="relative flex items-center justify-center px-2 sm:px-4 py-2.5 bg-[#0f0f23] border-t border-white/[0.04]">
+    <div className="relative flex items-center justify-center px-2 sm:px-4 py-2.5 bg-[#0a0a1a] border-t border-white/[0.04]">
       {/* Center controls */}
       <div className="flex items-center gap-1.5 sm:gap-2">
         {/* Mic with dropdown arrow */}
@@ -219,7 +219,7 @@ export function ControlBar({
             className="fixed inset-0 z-40"
             onClick={() => setShowMore(false)}
           />
-          <div className="absolute bottom-14 left-1/2 -translate-x-1/2 bg-[#1c1c38] rounded-xl shadow-2xl shadow-black/50 p-1.5 z-50 sm:hidden border border-white/[0.08] min-w-[200px]">
+          <div className="absolute bottom-14 left-1/2 -translate-x-1/2 bg-[#18183a] rounded-xl shadow-2xl shadow-black/50 p-1.5 z-50 sm:hidden border border-white/[0.08] min-w-[200px]">
             <button
               onClick={() => {
                 onToggleScreenShare();

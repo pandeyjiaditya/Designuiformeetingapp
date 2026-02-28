@@ -6,7 +6,7 @@ import { ChatPanel } from "./chat-panel";
 import { ParticipantsPanel } from "./participants-panel";
 import { participants as initialParticipants, chatMessages as initialMessages } from "./mock-data";
 import type { ChatMessage } from "./mock-data";
-import { Shield, Copy, Check, ChevronLeft, MoreVertical, Maximize2, Grid3X3 } from "lucide-react";
+import { Copy, Check, ChevronLeft, MoreVertical, Maximize2, Grid3X3, Popcorn } from "lucide-react";
 
 export function MeetingRoom() {
   const navigate = useNavigate();
@@ -77,14 +77,14 @@ export function MeetingRoom() {
     : participants;
 
   return (
-    <div className="h-screen w-screen flex flex-col bg-[#0f0f23] overflow-hidden">
+    <div className="h-screen w-screen flex flex-col bg-[#0a0a1a] overflow-hidden">
       {/* Top bar */}
       <div
-        className={`flex items-center justify-between px-3 sm:px-4 py-2 bg-[#0f0f23]/90 backdrop-blur-sm border-b border-white/[0.04] z-10 transition-transform duration-300 ${
+        className={`flex items-center justify-between px-3 sm:px-4 py-2 bg-[#0a0a1a]/90 backdrop-blur-sm border-b border-white/[0.04] z-10 transition-transform duration-300 ${
           showTopBar ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        {/* Left: back + meeting info */}
+        {/* Left */}
         <div className="flex items-center gap-2">
           <button
             onClick={() => navigate("/")}
@@ -93,32 +93,32 @@ export function MeetingRoom() {
             <ChevronLeft className="w-4 h-4 text-white/60" />
           </button>
           <div className="flex items-center gap-2">
-            <span className="text-sm text-white/80 hidden sm:inline">Team Standup</span>
-            <span className="text-white/20 hidden sm:inline">|</span>
-            <span className="text-xs text-white/40 tabular-nums">{formatTime(elapsed)}</span>
+            <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-orange-500 to-pink-500 flex items-center justify-center">
+              <Popcorn className="w-3.5 h-3.5 text-white" />
+            </div>
+            <span className="text-sm text-white/70 hidden sm:inline">Movie Night 🍿</span>
+            <span className="text-white/15 hidden sm:inline">·</span>
+            <span className="text-xs text-white/30 tabular-nums">{formatTime(elapsed)}</span>
           </div>
         </div>
 
-        {/* Center: meeting code (desktop) */}
-        <div className="hidden md:flex items-center gap-2 bg-white/[0.04] rounded-lg px-3 py-1.5 border border-white/[0.06]">
-          <span className="text-xs text-white/50 tracking-wider">abc-defg-hij</span>
+        {/* Center: room code */}
+        <div className="hidden md:flex items-center gap-2 bg-white/[0.04] rounded-full px-3 py-1.5 border border-white/[0.06]">
+          <span className="text-xs text-white/40 tracking-wider">chill-vibes-420</span>
           <button
             onClick={handleCopyLink}
-            className="w-6 h-6 rounded hover:bg-white/10 flex items-center justify-center transition-colors"
+            className="w-6 h-6 rounded-full hover:bg-white/10 flex items-center justify-center transition-colors"
           >
             {copied ? (
               <Check className="w-3 h-3 text-green-400" />
             ) : (
-              <Copy className="w-3 h-3 text-white/40" />
+              <Copy className="w-3 h-3 text-white/30" />
             )}
           </button>
         </div>
 
-        {/* Right: actions */}
+        {/* Right */}
         <div className="flex items-center gap-1">
-          <button className="w-8 h-8 rounded-lg hover:bg-white/[0.06] flex items-center justify-center transition-colors hidden sm:flex">
-            <Shield className="w-4 h-4 text-white/40" />
-          </button>
           <button
             onClick={() => setPinnedId(null)}
             className="w-8 h-8 rounded-lg hover:bg-white/[0.06] flex items-center justify-center transition-colors hidden sm:flex"
@@ -141,9 +141,7 @@ export function MeetingRoom() {
         <div className="flex-1 flex flex-col overflow-hidden min-w-0">
           <div className="flex-1 p-1.5 sm:p-2.5 lg:p-3 overflow-hidden">
             {pinnedParticipant ? (
-              /* Pinned layout: speaker view */
               <div className="h-full flex flex-col gap-1.5 sm:gap-2">
-                {/* Large pinned video */}
                 <div className="flex-1 min-h-0">
                   <VideoTile
                     participant={pinnedParticipant}
@@ -152,7 +150,6 @@ export function MeetingRoom() {
                     onPin={() => setPinnedId(null)}
                   />
                 </div>
-                {/* Filmstrip of others */}
                 <div className="flex gap-1.5 sm:gap-2 overflow-x-auto pb-0.5 flex-shrink-0 scrollbar-hide">
                   {otherParticipants.map((p) => (
                     <div key={p.id} className="w-28 h-20 sm:w-36 sm:h-24 lg:w-44 lg:h-28 flex-shrink-0">
@@ -165,7 +162,6 @@ export function MeetingRoom() {
                 </div>
               </div>
             ) : (
-              /* Grid layout */
               <div
                 className={`h-full grid gap-1.5 sm:gap-2 auto-rows-fr ${
                   participants.length <= 1
@@ -192,7 +188,7 @@ export function MeetingRoom() {
           </div>
         </div>
 
-        {/* Side panel (chat or participants) */}
+        {/* Side panel */}
         {sidePanel && (
           <div className="w-full sm:w-80 lg:w-[340px] flex-shrink-0 border-l border-white/[0.06] absolute sm:relative inset-0 sm:inset-auto z-40 sm:z-auto">
             {isChatOpen ? (

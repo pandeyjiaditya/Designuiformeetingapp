@@ -26,10 +26,10 @@ export function ChatPanel({ messages, onSendMessage, onClose }: ChatPanelProps) 
   };
 
   return (
-    <div className="flex flex-col h-full bg-[#13132b] text-white">
+    <div className="flex flex-col h-full bg-[#0f0f28] text-white">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.06]">
-        <h3 className="text-sm text-white/80">In-call messages</h3>
+        <h3 className="text-sm text-white/70">Chat 💬</h3>
         <button
           onClick={onClose}
           className="w-7 h-7 rounded-lg hover:bg-white/[0.06] flex items-center justify-center transition-colors"
@@ -55,7 +55,7 @@ export function ChatPanel({ messages, onSendMessage, onClose }: ChatPanelProps) 
               <div
                 className={`max-w-[80%] px-3 py-2 text-sm ${
                   isYou
-                    ? "bg-indigo-500/80 text-white rounded-2xl rounded-br-sm"
+                    ? "bg-gradient-to-r from-pink-500/80 to-orange-500/70 text-white rounded-2xl rounded-br-sm"
                     : "bg-white/[0.06] text-white/85 rounded-2xl rounded-bl-sm"
                 }`}
               >
@@ -68,14 +68,14 @@ export function ChatPanel({ messages, onSendMessage, onClose }: ChatPanelProps) 
 
       {/* Notice */}
       <div className="px-4 py-1.5">
-        <p className="text-[10px] text-white/25 text-center">
-          Messages are visible to everyone in the call and deleted when the call ends.
+        <p className="text-[10px] text-white/20 text-center">
+          messages disappear when the room closes ✨
         </p>
       </div>
 
       {/* Input */}
       <div className="px-3 py-2.5 border-t border-white/[0.06]">
-        <div className="flex items-center gap-1.5 bg-white/[0.05] rounded-xl px-2.5 py-1.5 border border-white/[0.06] focus-within:border-indigo-500/30 transition-colors">
+        <div className="flex items-center gap-1.5 bg-white/[0.05] rounded-xl px-2.5 py-1.5 border border-white/[0.06] focus-within:border-pink-500/30 transition-colors">
           <button className="w-7 h-7 rounded-lg hover:bg-white/[0.06] flex items-center justify-center flex-shrink-0 transition-colors">
             <Smile className="w-4 h-4 text-white/30" />
           </button>
@@ -84,7 +84,7 @@ export function ChatPanel({ messages, onSendMessage, onClose }: ChatPanelProps) 
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
-            placeholder="Send a message..."
+            placeholder="say something..."
             className="flex-1 bg-transparent text-sm text-white placeholder-white/25 outline-none min-w-0"
           />
           <button className="w-7 h-7 rounded-lg hover:bg-white/[0.06] flex items-center justify-center flex-shrink-0 transition-colors">
@@ -93,7 +93,7 @@ export function ChatPanel({ messages, onSendMessage, onClose }: ChatPanelProps) 
           <button
             onClick={handleSend}
             disabled={!input.trim()}
-            className="w-7 h-7 rounded-lg bg-indigo-500 hover:bg-indigo-600 disabled:opacity-20 disabled:hover:bg-indigo-500 flex items-center justify-center flex-shrink-0 transition-all"
+            className="w-7 h-7 rounded-lg bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600 disabled:opacity-20 flex items-center justify-center flex-shrink-0 transition-all"
           >
             <Send className="w-3.5 h-3.5 text-white" />
           </button>
